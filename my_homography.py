@@ -354,65 +354,65 @@ if __name__ == '__main__':
     print('my_homography')
 
 # # """2.1"""
-# im1 = cv2.imread('incline/incline_L_pyr.png',0)
-# im2 = cv2.imread('incline/incline_R_pyr.png',0)
-# p1, p2 = getPoints(im1, im2, 3)
-# print(f"\np1:\n {p1}\n")
-# np.save("incline/p2.npy", p2)
-#
+im1 = cv2.imread('incline/incline_L_pyr.png',0)
+im2 = cv2.imread('incline/incline_R_pyr.png',0)
+p1, p2 = getPoints(im1, im2, 3)
+print(f"\np1:\n {p1}\n")
+np.save("incline/p2.npy", p2)
+
 
 
 
 # # """2.2"""
-# H2to1 = computeH(p1, p2)
-# print(f"\nH2to1:\n {H2to1}\n")
-# np.save("incline/H2to1_pyr.npy", H2to1)
-#
-#
+H2to1 = computeH(p1, p2)
+print(f"\nH2to1:\n {H2to1}\n")
+np.save("incline/H2to1_pyr.npy", H2to1)
+
+
 
 
 # """2.3"""
-# H2to1 = np.load("incline/H2to1_pyr.npy")
-# im2 = cv2.imread('incline/incline_R_pyr.png')
-# outsize = np.array([350, 900])
-# warp_im2 = warpH(im2, H2to1, outsize, LAB_space=False, kind='cubic')
-# cv2.imwrite('incline/warp_im2_cubic.png', warp_im2)
-#
+H2to1 = np.load("incline/H2to1_pyr.npy")
+im2 = cv2.imread('incline/incline_R_pyr.png')
+outsize = np.array([350, 900])
+warp_im2 = warpH(im2, H2to1, outsize, LAB_space=False, kind='cubic')
+cv2.imwrite('incline/warp_im2_cubic.png', warp_im2)
 
 
-#
+
+
 # """2.4"""
-# img1 = cv2.imread('incline/incline_L_pyr.png')
-# warp_im2 = cv2.imread('incline/warp_im2.png')
-# panoImg = imageStitching(img1, warp_im2)
-# cv2.imwrite('incline/panoImg.png', panoImg)
-# cv2.imshow("incline/panoImg", panoImg)
-# cv2.waitKey(0)
-#
+img1 = cv2.imread('incline/incline_L_pyr.png')
+warp_im2 = cv2.imread('incline/warp_im2.png')
+panoImg = imageStitching(img1, warp_im2)
+cv2.imwrite('incline/panoImg.png', panoImg)
+cv2.imshow("incline/panoImg", panoImg)
+cv2.waitKey(0)
+
 
 
 
 """2.5"""
-# img1 = cv2.imread('incline/incline_L_pyr.png')
-# img2 = cv2.imread('incline/incline_R_pyr.png')
-# p1, p2 = getPoints_SIFT(img1,img2, N=7)
-# print("points")
-#
-# # H2to1_sift = computeH(p1, p2)
-#
-# print(f"H2to1_sift:\n {H2to1_sift}\n")
-# print("H2to1_sift")
-#
-# outsize = np.array([350, 900])
-# warp_im2_sift = warpH(img2, H2to1_sift, outsize, LAB_space=False, kind='cubic')
+img1 = cv2.imread('incline/incline_L_pyr.png')
+img2 = cv2.imread('incline/incline_R_pyr.png')
+p1, p2 = getPoints_SIFT(img1,img2, N=7)
+print("points")
 
-# cv2.imwrite('incline/warp_im2_cubic_sift.png', warp_im2_sift)
-# print("warp_im2_sift")
-#
-# panoImg_sift = imageStitching(img1, warp_im2_sift)
-# cv2.imwrite('incline/panoImg_sift.png', panoImg_sift)
-# cv2.imshow("incline/panoImg_sift", panoImg_sift)
-# cv2.waitKey(0)
+# H2to1_sift = computeH(p1, p2)
+
+print(f"H2to1_sift:\n {H2to1_sift}\n")
+print("H2to1_sift")
+
+outsize = np.array([350, 900])
+warp_im2_sift = warpH(img2, H2to1_sift, outsize, LAB_space=False, kind='cubic')
+
+cv2.imwrite('incline/warp_im2_cubic_sift.png', warp_im2_sift)
+print("warp_im2_sift")
+
+panoImg_sift = imageStitching(img1, warp_im2_sift)
+cv2.imwrite('incline/panoImg_sift.png', panoImg_sift)
+cv2.imshow("incline/panoImg_sift", panoImg_sift)
+cv2.waitKey(0)
 
 
 
@@ -420,134 +420,134 @@ if __name__ == '__main__':
 """2.7"""
 """stiching - SIFT & manual with and without RANSAC for all images"""
 
-# start = time.time()
-# filepath = 'sintra/sintra'
-# pyrDownIter = 3
-# pyrDownImages(pyrDownIter=pyrDownIter, filepath=filepath)
-# img4 = cv2.imread(filepath + '4_pyr_real.png')
-#
-#
-# ## hyperParameters for sintra
-# if (filepath=='sintra/sintra'):
-#     if (pyrDownIter == 0):
-#         outsize = np.array([4000, 14400])
-#         N = 600
-#         SiftTreshhold = 0.12
-#     if (pyrDownIter == 1):
-#         outsize = np.array([2000, 7200])
-#         N = 600
-#         SiftTreshhold = 0.13
-#     if (pyrDownIter == 2):
-#         outsize = np.array([1000, 3600])
-#         N = 300
-#         SiftTreshhold = 0.14
-#     if (pyrDownIter == 3):
-#         outsize = np.array([600, 1800])
-#         N = 35
-#         SiftTreshhold = 0.15
-#     img4 = baseImageTranslation(img4, outsize,
-#                                 shiftX=(outsize[0] // 2)-(outsize[0] // 9),
-#                                 shiftY=(outsize[1] // 7)-(outsize[1] // 17))
-#
-# ## hyperParameters for beach
-# if (filepath=='beach/beach'):
-#     if (pyrDownIter == 2):
-#         outsize = np.array([2500, 1200])
-#         N = 15
-#         SiftTreshhold = 0.3
-#
-#     if (pyrDownIter == 1):
-#         outsize = np.array([5000, 2400])
-#         N = 50
-#         SiftTreshhold = 0.25
-#
-#     if (pyrDownIter == 0):
-#         outsize = np.array([10000, 4800])
-#         N = 120
-#         SiftTreshhold = 0.14
-#     img4 = baseImageTranslation(img4, outsize,
-#                                 shiftX=outsize[1] // 5,
-#                                 shiftY=outsize[0] // 10)
-#
-# ## hyperParameters for haifa
-# if (filepath=='haifa/haifa'):
-#     if (pyrDownIter == 3):
-#         SiftTreshhold = 0.15
-#         N =100
-#         outsize = np.array([900, 2500]) ## beach 2 pyr
-#
-#     if (pyrDownIter == 2):
-#         SiftTreshhold = 0.15
-#         N = 100
-#         outsize = np.array([1800, 5000])  ## beach 2 pyr
-#
-#     if (pyrDownIter == 1):
-#         SiftTreshhold = 0.15
-#         N = 200
-#         outsize = np.array([3600, 10000])  ## beach 2 pyr
-#     if (pyrDownIter == 0):
-#         SiftTreshhold = 0.14
-#         N = 400
-#         outsize = np.array([7200, 20000])  ## beach 2 pyr
-#     img4 = baseImageTranslation(img4, outsize,
-#                                 shiftX=outsize[1] // 7 - 100,
-#                                 shiftY=outsize[0] // 6)
-#
-# cv2.imwrite(filepath + '4_pyr.png', img4)
-# HpanoList = creatHtoImg4(index=[1,2,3,4,5], target=4, N=N,
-#                          SiftTreshhold=SiftTreshhold, filepath=filepath,
-#                          manual=False, RANSAC=True, nIter=1000, tol=1)
-#
-# pano12345 = creatPanom(HpanoList, outsize, filepath=filepath)
-# end = time.time()
-# print(f"\nRun Time:\n {end-start}\n")
-# cv2.imshow(filepath + "_pano.png", pano12345)
-#
+start = time.time()
+filepath = 'sintra/sintra'
+pyrDownIter = 3
+pyrDownImages(pyrDownIter=pyrDownIter, filepath=filepath)
+img4 = cv2.imread(filepath + '4_pyr_real.png')
+
+
+## hyperParameters for sintra
+if (filepath=='sintra/sintra'):
+    if (pyrDownIter == 0):
+        outsize = np.array([4000, 14400])
+        N = 600
+        SiftTreshhold = 0.12
+    if (pyrDownIter == 1):
+        outsize = np.array([2000, 7200])
+        N = 600
+        SiftTreshhold = 0.13
+    if (pyrDownIter == 2):
+        outsize = np.array([1000, 3600])
+        N = 300
+        SiftTreshhold = 0.14
+    if (pyrDownIter == 3):
+        outsize = np.array([600, 1800])
+        N = 35
+        SiftTreshhold = 0.15
+    img4 = baseImageTranslation(img4, outsize,
+                                shiftX=(outsize[0] // 2)-(outsize[0] // 9),
+                                shiftY=(outsize[1] // 7)-(outsize[1] // 17))
+
+## hyperParameters for beach
+if (filepath=='beach/beach'):
+    if (pyrDownIter == 2):
+        outsize = np.array([2500, 1200])
+        N = 15
+        SiftTreshhold = 0.3
+
+    if (pyrDownIter == 1):
+        outsize = np.array([5000, 2400])
+        N = 50
+        SiftTreshhold = 0.25
+
+    if (pyrDownIter == 0):
+        outsize = np.array([10000, 4800])
+        N = 120
+        SiftTreshhold = 0.14
+    img4 = baseImageTranslation(img4, outsize,
+                                shiftX=outsize[1] // 5,
+                                shiftY=outsize[0] // 10)
+
+## hyperParameters for haifa
+if (filepath=='haifa/haifa'):
+    if (pyrDownIter == 3):
+        SiftTreshhold = 0.15
+        N =100
+        outsize = np.array([900, 2500]) ## beach 2 pyr
+
+    if (pyrDownIter == 2):
+        SiftTreshhold = 0.15
+        N = 100
+        outsize = np.array([1800, 5000])  ## beach 2 pyr
+
+    if (pyrDownIter == 1):
+        SiftTreshhold = 0.15
+        N = 200
+        outsize = np.array([3600, 10000])  ## beach 2 pyr
+    if (pyrDownIter == 0):
+        SiftTreshhold = 0.14
+        N = 400
+        outsize = np.array([7200, 20000])  ## beach 2 pyr
+    img4 = baseImageTranslation(img4, outsize,
+                                shiftX=outsize[1] // 7 - 100,
+                                shiftY=outsize[0] // 6)
+
+cv2.imwrite(filepath + '4_pyr.png', img4)
+HpanoList = creatHtoImg4(index=[1,2,3,4,5], target=4, N=N,
+                         SiftTreshhold=SiftTreshhold, filepath=filepath,
+                         manual=False, RANSAC=True, nIter=1000, tol=1)
+
+pano12345 = creatPanom(HpanoList, outsize, filepath=filepath)
+end = time.time()
+print(f"\nRun Time:\n {end-start}\n")
+cv2.imshow(filepath + "_pano.png", pano12345)
+
 
 
 
 """2.11"""
 """affine VS projection"""
 """GOOD RESULTS"""
-# img1 = cv2.imread('bay/bay1.jpg')
-# img2 = cv2.imread('bay/bay2.jpg')
-# outsize = np.array([700, 1500])
-# img1 = baseImageTranslation(img1, outsize,
-#                                 shiftX=0,
-#                                 shiftY=outsize[0] // 10)
-# p1, p2 = getPoints_SIFT(img1,img2, N=30, treshhold=0.15)
-# print("points")
-#
-# H2to1_affine = computeAffineH(p1, p2)
-# print(f"H2to1_sift:\n {H2to1_affine}\n")
-# warp_im2_affine = warpH(img2, H2to1_affine, outsize, LAB_space=False, kind='linear')
-# panoImg_affine = imageStitching(img1, warp_im2_affine)
-# cv2.imwrite('bay/bay_affine.png', panoImg_affine)
-#
-# H2to1_projective = computeH(p1, p2)
-# print(f"H2to1_sift:\n {H2to1_projective}\n")
-# warp_im2_projective = warpH(img2, H2to1_projective, outsize, LAB_space=False, kind='linear')
-# panoImg_projective = imageStitching(img1, warp_im2_projective)
-# cv2.imwrite('bay/bay_projective.png', panoImg_projective)
-#
-# """BAD RESULTS"""
-# img1 = cv2.imread('sintra/sintra2_pyr.png')
-# img2 = cv2.imread('sintra/sintra1_pyr.png')
-# outsize = np.array([1300, 2000])
-# img1 = baseImageTranslation(img1, outsize,
-#                                 shiftX=0,
-#                                 shiftY=outsize[0] // 10)
-# p1, p2 = getPoints_SIFT(img1,img2, N=30, treshhold=0.15)
-# print("points")
-#
-# H2to1_affine = computeAffineH(p1, p2)
-# print(f"H2to1_sift:\n {H2to1_affine}\n")
-# warp_im2_affine = warpH(img2, H2to1_affine, outsize, LAB_space=False, kind='linear')
-# panoImg_affine = imageStitching(img1, warp_im2_affine)
-# cv2.imwrite('sintra/sintra_affine.png', panoImg_affine)
-#
-# H2to1_projective = computeH(p1, p2)
-# print(f"H2to1_sift:\n {H2to1_projective}\n")
-# warp_im2_projective = warpH(img2, H2to1_projective, outsize, LAB_space=False, kind='linear')
-# panoImg_projective = imageStitching(img1, warp_im2_projective)
-# cv2.imwrite('sintra/sintra_projective.png', panoImg_projective)
+img1 = cv2.imread('bay/bay1.jpg')
+img2 = cv2.imread('bay/bay2.jpg')
+outsize = np.array([700, 1500])
+img1 = baseImageTranslation(img1, outsize,
+                                shiftX=0,
+                                shiftY=outsize[0] // 10)
+p1, p2 = getPoints_SIFT(img1,img2, N=30, treshhold=0.15)
+print("points")
+
+H2to1_affine = computeAffineH(p1, p2)
+print(f"H2to1_sift:\n {H2to1_affine}\n")
+warp_im2_affine = warpH(img2, H2to1_affine, outsize, LAB_space=False, kind='linear')
+panoImg_affine = imageStitching(img1, warp_im2_affine)
+cv2.imwrite('bay/bay_affine.png', panoImg_affine)
+
+H2to1_projective = computeH(p1, p2)
+print(f"H2to1_sift:\n {H2to1_projective}\n")
+warp_im2_projective = warpH(img2, H2to1_projective, outsize, LAB_space=False, kind='linear')
+panoImg_projective = imageStitching(img1, warp_im2_projective)
+cv2.imwrite('bay/bay_projective.png', panoImg_projective)
+
+"""BAD RESULTS"""
+img1 = cv2.imread('sintra/sintra2_pyr.png')
+img2 = cv2.imread('sintra/sintra1_pyr.png')
+outsize = np.array([1300, 2000])
+img1 = baseImageTranslation(img1, outsize,
+                                shiftX=0,
+                                shiftY=outsize[0] // 10)
+p1, p2 = getPoints_SIFT(img1,img2, N=30, treshhold=0.15)
+print("points")
+
+H2to1_affine = computeAffineH(p1, p2)
+print(f"H2to1_sift:\n {H2to1_affine}\n")
+warp_im2_affine = warpH(img2, H2to1_affine, outsize, LAB_space=False, kind='linear')
+panoImg_affine = imageStitching(img1, warp_im2_affine)
+cv2.imwrite('sintra/sintra_affine.png', panoImg_affine)
+
+H2to1_projective = computeH(p1, p2)
+print(f"H2to1_sift:\n {H2to1_projective}\n")
+warp_im2_projective = warpH(img2, H2to1_projective, outsize, LAB_space=False, kind='linear')
+panoImg_projective = imageStitching(img1, warp_im2_projective)
+cv2.imwrite('sintra/sintra_projective.png', panoImg_projective)
